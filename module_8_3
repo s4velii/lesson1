@@ -10,7 +10,7 @@ class Car:
         if isinstance(vin_number, int) is False:
             raise IncorrectVinNumber("Некорректный тип vin номер")
     
-        elif vin_number > 9999999 or vin_number < 1000000:
+        if vin_number > 9999999 or vin_number < 1000000:
             raise IncorrectVinNumber("Неверный диапазон для vin номера")
         # else:
         #   return True 
