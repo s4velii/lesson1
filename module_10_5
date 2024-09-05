@@ -1,0 +1,25 @@
+from datetime import datetime
+import multiprocessing
+def read_info(name):
+    all_data = []
+    with open(name, 'r') as f:
+        while len(f.readline()) > 0:
+            all_data.append(f.readline())
+
+filenames = [f'./file {number}.txt' for number in range(1, 5)]
+
+# Линейный вызов: здесь у меня получилось 0:00:09.505710
+start = datetime.now()
+for file in filenames:
+    read_info(file)
+end = datetime.now()
+print(end - start)
+
+# Многопроцессный: здесь - 0:00:05.005121
+if __name__ == '__main__':
+    files = ["file 1.txt", "file 2.txt", "file 3.txt", "file 4.txt"]
+    start = datetime.now()
+    with multiprocessing.Pool(processes=4) as pool:
+        pool.map(read_info, files)
+    end = datetime.now()
+    print(end-start)
